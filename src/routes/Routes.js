@@ -16,22 +16,22 @@ import ReceitasFavoritas from '../pages/ReceitasFavoritas';
 function Routes() {
   return (
     <Switch>
-      <Route exact path="/" component={ Login } />
-      <Route path="/comidas" component={ Comidas } />
-      <Route path="/bebidas" component={ Bebidas } />
+      <Route path="/comidas/:id-da-receita/in-progress" component={ Preparando } />
+      <Route path="/bebidas/:id-da-receita/in-progress" component={ Preparando } />
       <Route path="/comidas/:id-da-receita" component={ Receita } />
       <Route path="/bebidas/:id-da-receita" component={ Receita } />
-      <Route path="/comidas/{id-da-receita}/in-progress" component={ Preparando } />
-      <Route path="/bebidas/{id-da-receita}/in-progress" component={ Preparando } />
-      <Route path="/explorar" component={ Explorar } />
+      <Route path="/comidas" component={ Comidas } />
+      <Route path="/bebidas" component={ Bebidas } />
+      <Route path="/explorar/bebidas/ingredientes" component={ Ingredientes } />
+      <Route path="/explorar/comidas/ingredientes" component={ Ingredientes } />
+      <Route path="/explorar/comidas/area" component={ Origem } />
       <Route path="/explorar/comidas" component={ Filtrar } />
       <Route path="/explorar/bebidas" component={ Filtrar } />
-      <Route path="/explorar/comidas/ingredientes" component={ Ingredientes } />
-      <Route path="/explorar/bebidas/ingredientes" component={ Ingredientes } />
-      <Route path="/explorar/comidas/area" component={ Origem } />
+      <Route path="/explorar" component={ Explorar } />
       <Route path="/perfil" component={ Perfil } />
-      <Route path="/receitas-feitas" component={ ReceitaFeita } />
       <Route path="/receitas-favoritas" component={ ReceitasFavoritas } />
+      <Route path="/receitas-feitas" component={ ReceitaFeita } />
+      <Route exact path="/" component={ Login } />
     </Switch>
   );
 }
