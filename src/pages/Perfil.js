@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router';
 
 function Perfil() {
   const [email, setEmail] = useState();
+  const history = useHistory();
 
   useEffect(() => {
     if (localStorage.getItem('user')) {
@@ -13,22 +15,39 @@ function Perfil() {
   const redirectToLogin = () => {
     history.push('/');
   };
-  
+
   const redirectToDo = () => {
     history.push('/receitas-feitas');
   };
-  
+
   const redirectToFavorite = () => {
     history.push('/receitas-favoritas');
-    localStorage.clear;
   };
 
   return (
     <section>
-      <span data-testid="profile-email" > {email} </span>
-      <button data-testid="profile-done-btn"  type="button" onClick={ redirectToLogin }> Receitas Feitas </button>
-      <button data-testid="profile-favorite-btn"  type="button" onClick={ redirectToDo }> receitas Favoritas </button>
-      <button data-testid="profile-logout-btn" type="button" onClick={ redirectToFavorite }> Sair </button>
+      <span data-testid="profile-email">{email}</span>
+      <button
+        data-testid="profile-done-btn"
+        type="button"
+        onClick={ redirectToLogin }
+      >
+        Receitas Feitas
+      </button>
+      <button
+        data-testid="profile-favorite-btn"
+        type="button"
+        onClick={ redirectToDo }
+      >
+        receitas Favoritas
+      </button>
+      <button
+        data-testid="profile-logout-btn"
+        type="button"
+        onClick={ redirectToFavorite }
+      >
+        Sair
+      </button>
     </section>
   );
 }

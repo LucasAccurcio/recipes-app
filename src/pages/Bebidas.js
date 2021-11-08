@@ -1,11 +1,11 @@
 import React from 'react';
-import BarraBuscar from '../components/BarraBuscar';
+import Header from '../components/Header';
 
 function Bebidas() {
   return (
     <section>
       <h1>Bebidas</h1>
-      <BarraBuscar />
+      <Header />
     </section>
   );
 }

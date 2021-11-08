@@ -67,7 +67,7 @@ function BarraBuscar() {
 
   return (
     <section>
-      <div>
+      <div className="form-container">
         <input
           name="text"
           data-testid="search-input"

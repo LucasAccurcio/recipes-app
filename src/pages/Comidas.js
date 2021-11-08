@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import BarraBuscar from '../components/BarraBuscar';
 import CardReceita from '../components/CardReceita';
+import Header from '../components/Header';
 import Context from '../context/Context';
 
 function Comidas() {
@@ -9,6 +9,7 @@ function Comidas() {
   function showReceitas() {
     return (
       <section>
+        <Header />
         { meals.map(({ strMeal, strMealThumb }, index) => (
           <CardReceita
             key={ index }
@@ -24,7 +25,6 @@ function Comidas() {
   return (
     <section>
       <h1>Comidas</h1>
-      <BarraBuscar />
       { meals ? showReceitas() : 'Not Found' }
     </section>
   );

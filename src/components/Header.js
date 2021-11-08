@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import BarraBuscar from './BarraBuscar';
 
 export default function Header() {
   const [showSearchBar, setShowSearchBar] = useState(false);
@@ -32,48 +33,7 @@ export default function Header() {
         </button>
         { showSearchBar
           && (
-            <section>
-              <div>
-                <input
-                  data-testid="search-input"
-                  type="text"
-                  placeholder="Buscar Receita"
-                />
-              </div>
-              <label htmlFor="ingredient-radio">
-                <input
-                  type="radio"
-                  data-testid="ingredient-search-radio"
-                  id="ingredient-radio"
-                  name="search"
-                  value="ingrediente"
-                />
-                Ingrediente
-              </label>
-              <label htmlFor="name-radio">
-                <input
-                  type="radio"
-                  data-testid="name-search-radio"
-                  id="name-radio"
-                  name="search"
-                  value="nome"
-                />
-                Nome
-              </label>
-              <label htmlFor="first-letter-radio">
-                <input
-                  type="radio"
-                  data-testid="first-letter-search-radio"
-                  id="first-letter-radio"
-                  name="search"
-                  value="primeira letra"
-                />
-                Primeira letra
-              </label>
-              <div>
-                <button type="button" data-testid="exec-search-btn">Buscar</button>
-              </div>
-            </section>
+            <BarraBuscar />
           ) }
       </header>
     );
