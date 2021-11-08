@@ -1,13 +1,22 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import Context from '../context/Context';
 import fetchAPI from '../services/fetchAPI';
 
 function BarraBuscar() {
   const [busca, setBusca] = useState();
-  const { data, setData } = useContext(Context);
+  const { data, setData, recipeType, setRecipeType } = useContext(Context);
   const history = useHistory();
   const page = history.location.pathname.split('/')[1];
+
+  useEffect(() => {
+    if (page === 'bebidas' || recipeType === 'cocktail') {
+      setRecipeType('cocktail');
+    } else if (page === 'comidas' || recipeType === 'meal') {
+      setRecipeType('meal');
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function handleChangeInput({ target }) {
     const { name, value } = target;
@@ -20,11 +29,12 @@ function BarraBuscar() {
     );
   }
 
-  async function requestBuscaComida({ text, type }) {
+  async function requestBuscaReceita({ text, type }) {
     const VALIDATION_LETRA = text.length > 1;
-    const URL_INGREDIENTES = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${text}`;
-    const URL_NOME = `https://www.themealdb.com/api/json/v1/1/search.php?s=${text}`;
-    const URL_PRIMEIRA_LETRA = `https://www.themealdb.com/api/json/v1/1/search.php?f=${text}`;
+    const URL_INGREDIENTES = `https://www.the${recipeType}db.com/api/json/v1/1/filter.php?i=${text}`;
+    const URL_NOME = `https://www.the${recipeType}db.com/api/json/v1/1/search.php?s=${text}`;
+    const URL_PRIMEIRA_LETRA = `https://www.the${recipeType}db.com/api/json/v1/1/search.php?f=${text}`;
+    console.log(URL_INGREDIENTES, URL_NOME, URL_PRIMEIRA_LETRA);
     switch (type) {
     case 'ingrediente':
       return setData(await fetchAPI(URL_INGREDIENTES));
@@ -38,38 +48,11 @@ function BarraBuscar() {
     }
   }
 
-  async function requestBuscaBebida({ text, type }) {
-    const VALIDATION_LETRA = text.length > 1;
-    const URL_INGREDIENTES = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${text}`;
-    const URL_NOME = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${text}`;
-    const URL_PRIMEIRA_LETRA = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${text}`;
-    switch (type) {
-    case 'ingrediente':
-      return setData(await fetchAPI(URL_INGREDIENTES));
-    case 'nome':
-      return setData(await fetchAPI(URL_NOME));
-    case 'primeira letra':
-      return (
-        VALIDATION_LETRA ? showAlert() : setData(await fetchAPI(URL_PRIMEIRA_LETRA))
-      );
-    default:
-      break;
-    }
-  }
-
   function redirectReceive(receita, type) {
     if (type === 'comidas' && receita.meals.length === 1) {
       history.push(`/comidas/${receita.meals[0].idMeal}`);
     } else if (type === 'bebidas' && receita.drinks.length === 1) {
       history.push(`/bebidas/${receita.drinks[0].idDrink}`);
-    }
-  }
-
-  function clickBusca(typePage) {
-    if (typePage === 'comidas') {
-      requestBuscaComida(busca);
-    } else if (typePage === 'bebidas') {
-      requestBuscaBebida(busca);
     }
   }
 
@@ -123,7 +106,7 @@ function BarraBuscar() {
         <button
           type="button"
           data-testid="exec-search-btn"
-          onClick={ () => clickBusca(page) }
+          onClick={ () => requestBuscaReceita(busca) }
         >
           Buscar
         </button>
