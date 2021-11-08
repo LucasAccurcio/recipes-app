@@ -1,8 +1,10 @@
 import React from 'react';
+import Header from '../components/Header';
 
 function ReceitaFeita() {
   return (
     <section>
+      <Header />
       <h1>ReceitaFeita</h1>
     </section>
   );

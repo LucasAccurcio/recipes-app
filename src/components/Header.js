@@ -24,12 +24,12 @@ export default function Header() {
   ) {
     return (
       <header className="header-content">
-        <button data-testid="profile-top-btn" type="button" onClick={ redirectToProfile }>
-          <img src={ profileIcon } alt="Perfil" />
+        <button type="button" onClick={ redirectToProfile }>
+          <img data-testid="profile-top-btn" src={ profileIcon } alt="Perfil" />
         </button>
         <span data-testid="page-title">Componente a ser renderizado</span>
-        <button data-testid="search-top-btn" type="button" onClick={ setStateSearchBar }>
-          <img src={ searchIcon } alt="Busca" />
+        <button type="button" onClick={ setStateSearchBar }>
+          <img data-testid="search-top-btn" src={ searchIcon } alt="Busca" />
         </button>
         { showSearchBar
           && (

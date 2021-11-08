@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import CardReceita from '../components/CardReceita';
+import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Context from '../context/Context';
 
@@ -18,6 +19,7 @@ function Comidas() {
             index={ index }
           />
         )) }
+        <Footer />
       </section>
     );
   }
