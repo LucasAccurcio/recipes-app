@@ -10,7 +10,6 @@ function Comidas() {
   function showReceitas() {
     return (
       <section>
-        <Header />
         { meals.map(({ strMeal, strMealThumb }, index) => (
           <CardReceita
             key={ index }
@@ -19,15 +18,16 @@ function Comidas() {
             index={ index }
           />
         )) }
-        <Footer />
       </section>
     );
   }
 
   return (
     <section>
+      <Header />
       <h1>Comidas</h1>
       { meals ? showReceitas() : 'Not Found' }
+      <Footer />
     </section>
   );
 }

@@ -5,7 +5,7 @@ import fetchAPI from '../services/fetchAPI';
 
 function BarraBuscar() {
   const [busca, setBusca] = useState();
-  const { setData } = useContext(Context);
+  const { data, setData } = useContext(Context);
   const history = useHistory();
   const page = history.location.pathname.split('/')[1];
 
@@ -57,6 +57,14 @@ function BarraBuscar() {
     }
   }
 
+  function redirectReceive(receita, type) {
+    if (type === 'comidas' && receita.meals.length === 1) {
+      history.push(`/comidas/${receita.meals[0].idMeal}`);
+    } else if (type === 'bebidas' && receita.drinks.length === 1) {
+      history.push(`/bebidas/${receita.drinks[0].idDrink}`);
+    }
+  }
+
   function clickBusca(typePage) {
     if (typePage === 'comidas') {
       requestBuscaComida(busca);
@@ -64,6 +72,8 @@ function BarraBuscar() {
       requestBuscaBebida(busca);
     }
   }
+
+  redirectReceive(data, page);
 
   return (
     <section>
