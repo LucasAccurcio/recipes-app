@@ -3,6 +3,7 @@ import './styles/Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Routes from './routes/Routes';
 import Provider from './context/Provider';
+import './styles/Login.css';
 
 function App() {
   return (
