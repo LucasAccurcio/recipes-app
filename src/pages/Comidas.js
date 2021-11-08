@@ -7,11 +7,13 @@ import Context from '../context/Context';
 function Comidas() {
   const { data: { meals } } = useContext(Context);
 
-  function showReceitas() {
+  function showComidas() {
+    const MAX_MEALS = 12;
     return (
       <section>
         { meals.map(({ strMeal, strMealThumb }, index) => (
-          <CardReceita
+          index < MAX_MEALS
+          && <CardReceita
             key={ index }
             name={ strMeal }
             img={ strMealThumb }
@@ -26,7 +28,7 @@ function Comidas() {
     <section>
       <Header />
       <h1>Comidas</h1>
-      { meals ? showReceitas() : 'Not Found' }
+      { meals ? showComidas() : 'Not Found' }
       <Footer />
     </section>
   );
