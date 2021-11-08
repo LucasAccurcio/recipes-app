@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router';
+import Context from '../context/Context';
 import fetchAPI from '../services/fetchAPI';
 
 function BarraBuscar() {
   const [busca, setBusca] = useState();
-  const [request, setRequest] = useState();
+  const { setData } = useContext(Context);
   const history = useHistory();
   const page = history.location.pathname.split('/')[1];
-
-  console.log(request);
 
   function handleChangeInput({ target }) {
     const { name, value } = target;
@@ -28,15 +27,14 @@ function BarraBuscar() {
     const URL_PRIMEIRA_LETRA = `https://www.themealdb.com/api/json/v1/1/search.php?f=${text}`;
     switch (type) {
     case 'ingrediente':
-      return setRequest(await fetchAPI(URL_INGREDIENTES));
+      return setData(await fetchAPI(URL_INGREDIENTES));
     case 'nome':
-      return setRequest(await fetchAPI(URL_NOME));
+      return setData(await fetchAPI(URL_NOME));
     case 'primeira letra':
-      return (
-        VALIDATION_LETRA ? showAlert() : setRequest(await fetchAPI(URL_PRIMEIRA_LETRA))
+      return (VALIDATION_LETRA ? showAlert() : setData(await fetchAPI(URL_PRIMEIRA_LETRA))
       );
     default:
-      return 'Nenhuma comida encontrada';
+      break;
     }
   }
 
@@ -47,15 +45,15 @@ function BarraBuscar() {
     const URL_PRIMEIRA_LETRA = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${text}`;
     switch (type) {
     case 'ingrediente':
-      return setRequest(await fetchAPI(URL_INGREDIENTES));
+      return setData(await fetchAPI(URL_INGREDIENTES));
     case 'nome':
-      return setRequest(await fetchAPI(URL_NOME));
+      return setData(await fetchAPI(URL_NOME));
     case 'primeira letra':
       return (
-        VALIDATION_LETRA ? showAlert() : setRequest(await fetchAPI(URL_PRIMEIRA_LETRA))
+        VALIDATION_LETRA ? showAlert() : setData(await fetchAPI(URL_PRIMEIRA_LETRA))
       );
     default:
-      return 'Nenhuma comida encontrada';
+      break;
     }
   }
 
