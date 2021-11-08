@@ -10,7 +10,7 @@ function Comidas() {
   function showReceitas() {
     return (
       <section>
-        <Header />
+        <Header componentName="Comidas" />
         { meals.map(({ strMeal, strMealThumb }, index) => (
           <CardReceita
             key={ index }
