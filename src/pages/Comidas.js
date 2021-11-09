@@ -11,12 +11,13 @@ function Comidas() {
     return (
       <section>
         <Header />
-        { meals.map(({ strMeal, strMealThumb }, index) => (
+        { meals.map(({ strMeal, strMealThumb, idMeal }, index) => (
           <CardReceita
             key={ index }
             name={ strMeal }
             img={ strMealThumb }
             index={ index }
+            idMeal={ idMeal }
           />
         )) }
         <Footer />

@@ -7,6 +7,7 @@ const Provider = ({ children }) => {
     meals: [],
     drinks: [],
   });
+
   const [recipeType, setRecipeType] = useState();
 
   const context = {
