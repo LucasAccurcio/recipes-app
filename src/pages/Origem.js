@@ -5,7 +5,7 @@ import Header from '../components/Header';
 function Origem() {
   return (
     <section>
-      <Header />
+      <Header componentName="Explorar Origem" />
       <h1>Origem</h1>
       <Footer />
     </section>

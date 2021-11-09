@@ -11,7 +11,7 @@ function Bebidas() {
     const MAX_DRINKS = 12;
     return (
       <section>
-        <Header />
+        <Header componentName="Bebidas" />
         { drinks.map(({ strDrink, strDrinkThumb }, index) => (
           index < MAX_DRINKS
           && <CardReceita

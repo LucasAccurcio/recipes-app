@@ -29,7 +29,7 @@ function Perfil() {
 
   return (
     <section>
-      <Header />
+      <Header componentName="Perfil" />
       <span data-testid="profile-email">{email}</span>
       <button
         data-testid="profile-done-btn"

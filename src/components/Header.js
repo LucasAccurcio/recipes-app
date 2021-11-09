@@ -4,7 +4,7 @@ import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import BarraBuscar from './BarraBuscar';
 
-export default function Header() {
+export default function Header({ componentName }) {
   const [showSearchBar, setShowSearchBar] = useState(false);
 
   const history = useHistory();
@@ -27,7 +27,7 @@ export default function Header() {
         <button type="button" onClick={ redirectToProfile }>
           <img data-testid="profile-top-btn" src={ profileIcon } alt="Perfil" />
         </button>
-        <span data-testid="page-title">Componente a ser renderizado</span>
+        <span data-testid="page-title">{ componentName }</span>
         <button type="button" onClick={ setStateSearchBar }>
           <img data-testid="search-top-btn" src={ searchIcon } alt="Busca" />
         </button>
@@ -46,10 +46,10 @@ export default function Header() {
   ) {
     return (
       <header>
-        <button data-testid="profile-top-btn" type="button" onClick={ redirectToProfile }>
-          <img src={ profileIcon } alt="Perfil" />
+        <button type="button" onClick={ redirectToProfile }>
+          <img data-testid="profile-top-btn" src={ profileIcon } alt="Perfil" />
         </button>
-        <span data-testid="page-title">Componente a ser renderizado</span>
+        <span data-testid="page-title">{ componentName }</span>
       </header>
     );
   }

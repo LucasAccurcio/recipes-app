@@ -5,7 +5,7 @@ import Header from '../components/Header';
 function Explorar() {
   return (
     <section>
-      <Header />
+      <Header componentName="Explorar" />
       <h1>Explorar</h1>
       <Footer />
     </section>
