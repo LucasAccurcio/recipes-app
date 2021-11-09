@@ -5,13 +5,16 @@ import Context from './Context';
 const Provider = ({ children }) => {
   const [data, setData] = useState({
     meals: [],
+    drinks: [],
   });
-  const [comida, setComida] = useState([]);
+
+  const [recipeType, setRecipeType] = useState();
+
   const context = {
     data,
     setData,
-    comida,
-    setComida,
+    recipeType,
+    setRecipeType,
   };
 
   return (

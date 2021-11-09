@@ -25,10 +25,15 @@ function Comidas() {
     );
   }
 
+  function notFound() {
+    return (
+      global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
+    );
+  }
+
   return (
     <section>
-      <h1>Comidas</h1>
-      { meals ? showReceitas() : 'Not Found' }
+      { meals !== null ? showReceitas() : notFound() }
     </section>
   );
 }
