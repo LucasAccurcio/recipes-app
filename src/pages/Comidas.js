@@ -8,11 +8,13 @@ function Comidas() {
   const { data: { meals } } = useContext(Context);
 
   function showReceitas() {
+    const MAX_DRINKS = 12;
     return (
       <section>
         <Header />
         { meals.map(({ strMeal, strMealThumb, idMeal }, index) => (
-          <CardReceita
+          index < MAX_DRINKS
+          && <CardReceita
             key={ index }
             name={ strMeal }
             img={ strMealThumb }
