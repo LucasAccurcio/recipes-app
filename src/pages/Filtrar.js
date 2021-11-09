@@ -18,9 +18,11 @@ function Filtrar() {
 
   function showButtonOrigin() {
     return (
-      <button data-testid="explore-by-area" type="button">
-        Por Local de Origem
-      </button>
+      <Link to="/explorar/comidas/area">
+        <button data-testid="explore-by-area" type="button">
+          Por Local de Origem
+        </button>
+      </Link>
     );
   }
 
