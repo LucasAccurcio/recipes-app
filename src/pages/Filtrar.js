@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
@@ -28,9 +29,11 @@ function Filtrar() {
       <Header componentName={ atualComponent } />
       <h1>Filtrar</h1>
       <section>
-        <button data-testid="explore-by-ingredient" type="button">
-          Por Ingredientes
-        </button>
+        <Link to={ `${pathname}/ingredientes` }>
+          <button data-testid="explore-by-ingredient" type="button">
+            Por Ingredientes
+          </button>
+        </Link>
 
         { !isPageDrinks && showButtonOrigin() }
 
