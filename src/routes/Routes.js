@@ -16,11 +16,11 @@ import ReceitasFavoritas from '../pages/ReceitasFavoritas';
 function Routes() {
   return (
     <Switch>
-      <Route path="/comidas/:id-da-receita/in-progress" component={ Preparando } />
-      <Route path="/bebidas/:id-da-receita/in-progress" component={ Preparando } />
-      <Route path="/comidas/:id-da-receita" component={ Receita } />
-      <Route path="/bebidas/:id-da-receita" component={ Receita } />
-      <Route path="/comidas" component={ Comidas } />
+      <Route path="/comidas/:id/inProgress" component={ Preparando } />
+      <Route path="/bebidas/:id/inProgress" component={ Preparando } />
+      <Route path="/comidas/:id" component={ Receita } />
+      <Route path="/bebidas/:id" component={ Receita } />
+      <Route exact path="/comidas" component={ Comidas } />
       <Route path="/bebidas" component={ Bebidas } />
       <Route path="/explorar/bebidas/ingredientes" component={ Ingredientes } />
       <Route path="/explorar/comidas/ingredientes" component={ Ingredientes } />
@@ -29,8 +29,8 @@ function Routes() {
       <Route path="/explorar/bebidas" component={ Filtrar } />
       <Route path="/explorar" component={ Explorar } />
       <Route path="/perfil" component={ Perfil } />
-      <Route path="/receitas-favoritas" component={ ReceitasFavoritas } />
-      <Route path="/receitas-feitas" component={ ReceitaFeita } />
+      <Route path="/receitasFavoritas" component={ ReceitasFavoritas } />
+      <Route path="/receitasFeitas" component={ ReceitaFeita } />
       <Route exact path="/" component={ Login } />
     </Switch>
   );
