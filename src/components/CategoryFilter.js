@@ -6,7 +6,6 @@ const INITIAL_STATE = [{ strCategory: 'All' }];
 
 export default function CategoryFilter({ url }) {
   const [category, setCategory] = useState(INITIAL_STATE);
-  console.log(category);
   const getCategory = async () => {
     const categoryFilter = await fetchAPI(url);
     const MAX_CATEGORY = 5;
@@ -44,6 +43,3 @@ export default function CategoryFilter({ url }) {
 CategoryFilter.propTypes = {
   url: PropTypes.string.isRequired,
 };
-
-// meal 'https://www.themealdb.com/api/json/v1/1/list.php?c=list'
-// drink 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list'
