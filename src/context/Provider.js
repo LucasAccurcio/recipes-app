@@ -6,9 +6,12 @@ const Provider = ({ children }) => {
   const [data, setData] = useState({
     meals: [],
   });
+  const [comida, setComida] = useState([]);
   const context = {
     data,
     setData,
+    comida,
+    setComida,
   };
 
   return (

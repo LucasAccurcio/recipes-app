@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function CardReceita(props) {
-  const { name, img, index } = props;
+  const { name, img, index, idMeal } = props;
+
   return (
-    <section>
+    <Link to={ { pathname: `/comidas/${idMeal}`, state: { idMeal } } }>
       <Card data-testid={ `${index}-recipe-card` } style={ { width: '10rem' } }>
         <Card.Img
           data-testid={ `${index}-card-img` }
@@ -18,7 +20,7 @@ function CardReceita(props) {
           </Card.Title>
         </Card.Body>
       </Card>
-    </section>
+    </Link>
   );
 }
 
@@ -26,6 +28,7 @@ CardReceita.propTypes = {
   name: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
+  idMeal: PropTypes.string.isRequired,
 };
 
 export default CardReceita;

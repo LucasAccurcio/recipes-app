@@ -38,11 +38,11 @@ function BarraBuscar() {
     }
   }
 
-  async function requestBuscaBebida({ text, type }) {
+  async function requestBuscaBebida(food, { text, type }) {
     const VALIDATION_LETRA = text.length > 1;
-    const URL_INGREDIENTES = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${text}`;
-    const URL_NOME = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${text}`;
-    const URL_PRIMEIRA_LETRA = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${text}`;
+    const URL_INGREDIENTES = `https://www.${food}.com/api/json/v1/1/filter.php?i=${text}`;
+    const URL_NOME = `https://www.${food}.com/api/json/v1/1/search.php?s=${text}`;
+    const URL_PRIMEIRA_LETRA = `https://www.${food}.com/api/json/v1/1/search.php?f=${text}`;
     switch (type) {
     case 'ingrediente':
       return setData(await fetchAPI(URL_INGREDIENTES));
