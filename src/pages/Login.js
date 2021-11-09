@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-// import '../styles/Login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -8,7 +7,7 @@ function Login() {
   const [validar, setValidar] = useState(true);
   const history = useHistory();
 
-  const fazerLogin = () => {
+  const fazerLogin = async () => {
     const user = {
       email,
     };
