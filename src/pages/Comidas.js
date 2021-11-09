@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import CardReceita from '../components/CardReceita';
+import CategoryFilter from '../components/CategoryFilter';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Context from '../context/Context';
@@ -11,7 +12,8 @@ function Comidas() {
     const MAX_DRINKS = 12;
     return (
       <section>
-        <Header />
+        <Header componentName="Comidas" />
+        <CategoryFilter url="https://www.themealdb.com/api/json/v1/1/list.php?c=list" />
         { meals.map(({ strMeal, strMealThumb, idMeal }, index) => (
           index < MAX_DRINKS
           && <CardReceita
