@@ -7,29 +7,32 @@ import Context from '../context/Context';
 function Comidas() {
   const { data: { meals } } = useContext(Context);
 
-  function showComidas() {
-    const MAX_MEALS = 12;
+  function showReceitas() {
     return (
       <section>
+        <Header />
         { meals.map(({ strMeal, strMealThumb }, index) => (
-          index < MAX_MEALS
-          && <CardReceita
+          <CardReceita
             key={ index }
             name={ strMeal }
             img={ strMealThumb }
             index={ index }
           />
         )) }
+        <Footer />
       </section>
+    );
+  }
+
+  function notFound() {
+    return (
+      global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
     );
   }
 
   return (
     <section>
-      <Header />
-      <h1>Comidas</h1>
-      { meals ? showComidas() : 'Not Found' }
-      <Footer />
+      { meals !== null ? showReceitas() : notFound() }
     </section>
   );
 }

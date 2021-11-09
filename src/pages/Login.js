@@ -7,7 +7,7 @@ function Login() {
   const [validar, setValidar] = useState(true);
   const history = useHistory();
 
-  const fazerLogin = () => {
+  const fazerLogin = async () => {
     const user = {
       email,
     };

@@ -10,9 +10,9 @@ function BarraBuscar() {
   const page = history.location.pathname.split('/')[1];
 
   useEffect(() => {
-    if (page === 'bebidas' || recipeType === 'cocktail') {
+    if (page === 'bebidas') {
       setRecipeType('cocktail');
-    } else if (page === 'comidas' || recipeType === 'meal') {
+    } else if (page === 'comidas') {
       setRecipeType('meal');
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -29,12 +29,18 @@ function BarraBuscar() {
     );
   }
 
+  function notFound() {
+    return (
+      global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
+    );
+  }
+
   async function requestBuscaReceita({ text, type }) {
     const VALIDATION_LETRA = text.length > 1;
     const URL_INGREDIENTES = `https://www.the${recipeType}db.com/api/json/v1/1/filter.php?i=${text}`;
     const URL_NOME = `https://www.the${recipeType}db.com/api/json/v1/1/search.php?s=${text}`;
     const URL_PRIMEIRA_LETRA = `https://www.the${recipeType}db.com/api/json/v1/1/search.php?f=${text}`;
-    console.log(URL_INGREDIENTES, URL_NOME, URL_PRIMEIRA_LETRA);
+
     switch (type) {
     case 'ingrediente':
       return setData(await fetchAPI(URL_INGREDIENTES));
@@ -44,14 +50,15 @@ function BarraBuscar() {
       return (VALIDATION_LETRA ? showAlert() : setData(await fetchAPI(URL_PRIMEIRA_LETRA))
       );
     default:
-      break;
+      notFound();
     }
   }
 
   function redirectReceive(receita, type) {
     if (type === 'comidas' && receita.meals.length === 1) {
       history.push(`/comidas/${receita.meals[0].idMeal}`);
-    } else if (type === 'bebidas' && receita.drinks.length === 1) {
+    }
+    if (type === 'bebidas' && receita.drinks.length === 1) {
       history.push(`/bebidas/${receita.drinks[0].idDrink}`);
     }
   }

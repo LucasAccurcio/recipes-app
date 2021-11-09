@@ -11,6 +11,7 @@ function Bebidas() {
     const MAX_DRINKS = 12;
     return (
       <section>
+        <Header />
         { drinks.map(({ strDrink, strDrinkThumb }, index) => (
           index < MAX_DRINKS
           && <CardReceita
@@ -20,16 +21,20 @@ function Bebidas() {
             index={ index }
           />
         )) }
+        <Footer />
       </section>
+    );
+  }
+
+  function notFound() {
+    return (
+      global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
     );
   }
 
   return (
     <section>
-      <Header />
-      <h1>Bebidas</h1>
-      { drinks ? showDrinks() : 'Not Found' }
-      <Footer />
+      { drinks !== null ? showDrinks() : notFound() }
     </section>
   );
 }
