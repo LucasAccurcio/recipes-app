@@ -214,14 +214,19 @@ iframe {
   width: 360px;
 }
 
-.search-container input[ type = 'text' ] {
+.search-container input [ type = 'text' ] {
   margin: 2px;
   width: 52vh;
 }
 
-.search-container input[ type = 'radio' ] {
+.search-container input [ type = 'radio' ] {
   margin: 2px;
   width: 5vh;
+}
+
+header section button {
+  background-color: rgb(185, 185, 185);
+  border: 0;
 }
 
 .search-container button {
@@ -236,9 +241,4 @@ iframe {
   flex-flow: row wrap;
   justify-content: center;
   margin: 2px;
-}
-
-header section button {
-  background-color: rgb(185, 185, 185);
-  border: 0;
 }
