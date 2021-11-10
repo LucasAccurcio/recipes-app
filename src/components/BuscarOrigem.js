@@ -3,15 +3,15 @@ import Context from '../context/Context';
 import fetchAPI from '../services/fetchAPI';
 
 function BuscarOrigem() {
-  const { setRecipeArea } = useContext(Context);
+  const { data, setData } = useContext(Context);
   const [origem, setOrigem] = useState();
   const [area, setArea] = useState();
 
   useEffect(() => {
     async function getAreas() {
       const URL_AREA = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
-      const data = await fetchAPI(URL_AREA);
-      setOrigem(data);
+      const areas = await fetchAPI(URL_AREA);
+      setOrigem(areas);
     }
     getAreas();
   }, []);
@@ -20,7 +20,10 @@ function BuscarOrigem() {
     async function getComidasArea(origin) {
       const URL_COMIDA_AREA = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${origin}`;
       const listMeals = await fetchAPI(URL_COMIDA_AREA);
-      setRecipeArea(listMeals);
+      setData({
+        ...data,
+        meals: listMeals.meals,
+      });
     }
     getComidasArea(area);
   // eslint-disable-next-line react-hooks/exhaustive-deps

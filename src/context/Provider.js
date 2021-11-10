@@ -9,10 +9,6 @@ const Provider = ({ children }) => {
     drinks: [],
   });
 
-  const [recipeArea, setRecipeArea] = useState({
-    meals: [],
-  });
-
   const [recipeType, setRecipeType] = useState();
 
   const getDataFromAPI = async () => {
@@ -29,8 +25,6 @@ const Provider = ({ children }) => {
     setData,
     recipeType,
     setRecipeType,
-    recipeArea,
-    setRecipeArea,
   };
 
   useEffect(() => {

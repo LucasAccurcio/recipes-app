@@ -6,18 +6,17 @@ import Header from '../components/Header';
 import Context from '../context/Context';
 
 function Origem() {
-  const { recipeArea } = useContext(Context);
+  const { data } = useContext(Context);
   const MAX_RECIPE = 12;
-
-  console.log(recipeArea.meals);
 
   function showRecipes() {
     return (
       <section>
-        { recipeArea.meals.map(({ strMeal, strMealThumb, idMeal }, index) => (
+        { data.meals.map(({ strMeal, strMealThumb, idMeal }, index) => (
           index < MAX_RECIPE
         && <CardReceita
           key={ idMeal }
+          index={ index }
           name={ strMeal }
           img={ strMealThumb }
           id={ idMeal }
@@ -31,7 +30,7 @@ function Origem() {
     <section>
       <Header componentName="Explorar Origem" />
       <BuscarOrigem />
-      { recipeArea.meals && showRecipes() }
+      { data.meals && showRecipes() }
       <Footer />
     </section>
   );
