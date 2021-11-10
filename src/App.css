@@ -176,14 +176,14 @@ iframe {
   align-self: center;
   background-color: rgba(0, 0, 0, 0.4);
   display: flex;
-  justify-content: space-between;  
+  justify-content: space-between;
   width: 360px;
 }
 
 .container-footer {
   background-color: rgba(0, 0, 0, 0.4);
   display: flex;
-  justify-content: space-between;  
+  justify-content: space-between;
   width: 360px;
 }
 
@@ -200,8 +200,8 @@ iframe {
 }
 
 .category-button {
+  font-size: small; 
   margin: 2px;
-  font-size: small;
   height: 40px;
   width: 105px;
 }
