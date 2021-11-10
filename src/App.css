@@ -214,12 +214,12 @@ iframe {
   width: 360px;
 }
 
-.search-container input [ type = "text" ] {
+.search-container input [ type = 'text' ] {
   margin: 2px;
   width: 52vh;
 }
 
-.search-container input [ type = "radio" ] {
+.search-container input [ type = 'radio' ] {
   margin: 2px;
   width: 5vh;
 }
