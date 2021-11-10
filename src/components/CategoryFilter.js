@@ -25,10 +25,11 @@ export default function CategoryFilter({ url }) {
   }, []);
 
   return (
-    <nav>
+    <nav className="category-container">
       { category && category
         .map((cat, index) => (
           <button
+            className="category-button"
             key={ index }
             type="button"
             data-testid={ `${cat.strCategory}-category-filter` }

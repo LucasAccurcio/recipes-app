@@ -21,7 +21,7 @@ function Comidas() {
             name={ strMeal }
             img={ strMealThumb }
             index={ index }
-            idMeal={ idMeal }
+            id={ idMeal }
           />
         )) }
         <Footer />

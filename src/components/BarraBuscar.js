@@ -66,7 +66,7 @@ function BarraBuscar() {
   redirectReceive(data, page);
 
   return (
-    <section>
+    <section className="search-container">
       <div className="form-container">
         <input
           name="text"
@@ -109,15 +109,13 @@ function BarraBuscar() {
         />
         Primeira letra
       </label>
-      <div>
-        <button
-          type="button"
-          data-testid="exec-search-btn"
-          onClick={ () => requestBuscaReceita(busca) }
-        >
-          Buscar
-        </button>
-      </div>
+      <button
+        type="button"
+        data-testid="exec-search-btn"
+        onClick={ () => requestBuscaReceita(busca) }
+      >
+        Buscar
+      </button>
     </section>
   );
 }

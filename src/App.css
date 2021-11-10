@@ -172,3 +172,61 @@ iframe {
   outline: 0;
 }
 
+.header-container {
+  align-self: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: space-between;
+  width: 360px;
+}
+
+.container-footer {
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: space-between;
+  width: 360px;
+}
+
+.page-footer {
+  bottom: 0;
+  position: fixed;
+}
+
+.category-container {
+  background-color: white;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+
+.category-button {
+  font-size: small;
+  height: 40px;
+  margin: 2px;
+  width: 105px;
+}
+
+.search-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 2px;
+  width: 360px;
+}
+
+.search-container input[type=text] {
+  margin: 2px;
+  width: 52vh;
+}
+
+.search-container input[type=radio] {
+  margin: 2px;
+  width: 5vh;
+}
+
+.search-container button {
+  margin: 2px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 52vh;
+}
