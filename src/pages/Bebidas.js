@@ -14,13 +14,14 @@ function Bebidas() {
       <section>
         <Header componentName="Bebidas" />
         <CategoryFilter url="https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list" />
-        { drinks.map(({ strDrink, strDrinkThumb }, index) => (
+        { drinks.map(({ strDrink, strDrinkThumb, idDrink }, index) => (
           index < MAX_DRINKS
           && <CardReceita
             key={ index }
             name={ strDrink }
             img={ strDrinkThumb }
             index={ index }
+            id={ idDrink }
           />
         )) }
         <Footer />

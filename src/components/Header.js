@@ -24,13 +24,15 @@ export default function Header({ componentName }) {
   ) {
     return (
       <header className="header-content">
-        <button type="button" onClick={ redirectToProfile }>
-          <img data-testid="profile-top-btn" src={ profileIcon } alt="Perfil" />
-        </button>
-        <span data-testid="page-title">{ componentName }</span>
-        <button type="button" onClick={ setStateSearchBar }>
-          <img data-testid="search-top-btn" src={ searchIcon } alt="Busca" />
-        </button>
+        <section className="header-container">
+          <button type="button" onClick={ redirectToProfile }>
+            <img data-testid="profile-top-btn" src={ profileIcon } alt="Perfil" />
+          </button>
+          <h3 data-testid="page-title">{ componentName }</h3>
+          <button type="button" onClick={ setStateSearchBar }>
+            <img data-testid="search-top-btn" src={ searchIcon } alt="Busca" />
+          </button>
+        </section>
         { showSearchBar
           && (
             <BarraBuscar />
@@ -45,11 +47,14 @@ export default function Header({ componentName }) {
   && pathname !== '/explorar/comidas/area'
   ) {
     return (
-      <header>
-        <button type="button" onClick={ redirectToProfile }>
-          <img data-testid="profile-top-btn" src={ profileIcon } alt="Perfil" />
-        </button>
-        <span data-testid="page-title">{ componentName }</span>
+      <header className="header-content">
+        <section className="header-container">
+          <button type="button" onClick={ redirectToProfile }>
+            <img data-testid="profile-top-btn" src={ profileIcon } alt="Perfil" />
+          </button>
+          <h3 data-testid="page-title">{ componentName }</h3>
+          <p>&nbsp;</p>
+        </section>
       </header>
     );
   }

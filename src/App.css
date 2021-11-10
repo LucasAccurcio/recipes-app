@@ -172,3 +172,36 @@ iframe {
   outline: 0;
 }
 
+.header-container {
+  align-self: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: space-between;  
+  width: 360px;
+}
+
+.container-footer {
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: space-between;  
+  width: 360px;
+}
+
+.page-footer {
+  bottom: 0;
+  position: fixed;
+}
+
+.category-container {
+  background-color: white;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+
+.category-button {
+  margin: 2px;
+  font-size: small;
+  height: 40px;
+  width: 105px;
+}
