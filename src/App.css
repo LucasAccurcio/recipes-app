@@ -230,3 +230,10 @@ iframe {
   margin-right: auto;
   width: 52vh;
 }
+
+.card-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  margin: 2px;
+}

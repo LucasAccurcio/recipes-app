@@ -14,8 +14,9 @@ function Comidas() {
       <section>
         <Header componentName="Comidas" />
         <CategoryFilter url="https://www.themealdb.com/api/json/v1/1/list.php?c=list" />
-        { meals.map(({ strMeal, strMealThumb, idMeal }, index) => (
-          index < MAX_MEALS
+        <section className="card-container">
+          { meals.map(({ strMeal, strMealThumb, idMeal }, index) => (
+            index < MAX_MEALS
           && <CardReceita
             key={ index }
             name={ strMeal }
@@ -23,7 +24,8 @@ function Comidas() {
             index={ index }
             id={ idMeal }
           />
-        )) }
+          )) }
+        </section>
         <Footer />
       </section>
     );
