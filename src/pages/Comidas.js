@@ -9,13 +9,13 @@ function Comidas() {
   const { data: { meals } } = useContext(Context);
 
   function showReceitas() {
-    const MAX_DRINKS = 12;
+    const MAX_MEALS = 12;
     return (
       <section>
         <Header componentName="Comidas" />
         <CategoryFilter url="https://www.themealdb.com/api/json/v1/1/list.php?c=list" />
         { meals.map(({ strMeal, strMealThumb, idMeal }, index) => (
-          index < MAX_DRINKS
+          index < MAX_MEALS
           && <CardReceita
             key={ index }
             name={ strMeal }

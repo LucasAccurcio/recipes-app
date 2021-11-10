@@ -14,7 +14,8 @@ function Receitas() {
       .then((response) => setComida(response.meals[0]));
     setLoading(true);
   }
-  useEffect(() => fetchComida(url));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => fetchComida(url), []);
   return (
     <section className="recipe-container">
       {!loading ? <p>loading</p> : <ComidaContainer comida={ comida } />}
