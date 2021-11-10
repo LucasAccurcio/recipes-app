@@ -9,5 +9,4 @@ function ReceitaFeita() {
     </section>
   );
 }
-
 export default ReceitaFeita;

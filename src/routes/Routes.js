@@ -29,8 +29,8 @@ function Routes() {
       <Route path="/explorar/bebidas" component={ Filtrar } />
       <Route path="/explorar" component={ Explorar } />
       <Route path="/perfil" component={ Perfil } />
-      <Route path="/receitasFavoritas" component={ ReceitasFavoritas } />
-      <Route path="/receitasFeitas" component={ ReceitaFeita } />
+      <Route path="/receitas-favoritas" component={ ReceitasFavoritas } />
+      <Route path="/receitas-feitas" component={ ReceitaFeita } />
       <Route exact path="/" component={ Login } />
     </Switch>
   );
