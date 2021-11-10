@@ -9,12 +9,16 @@ function Receitas() {
   const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
   const [comida, setComida] = useState([]);
   const [loading, setLoading] = useState(false);
+
   function fetchComida(data) {
     fetchAPI(data)
       .then((response) => setComida(response.meals[0]));
     setLoading(true);
   }
-  useEffect(() => fetchComida(url));
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => fetchComida(url), []);
+
   return (
     <section className="recipe-container">
       {!loading ? <p>loading</p> : <ComidaContainer comida={ comida } />}
