@@ -12,6 +12,7 @@ import Preparando from '../pages/Preparando';
 import Receita from '../pages/Receita';
 import ReceitaFeita from '../pages/ReceitaFeita';
 import ReceitasFavoritas from '../pages/ReceitasFavoritas';
+import NotFound from '../pages/NotFound';
 
 function Routes() {
   return (
@@ -26,6 +27,7 @@ function Routes() {
       <Route path="/explorar/comidas/ingredientes" component={ Ingredientes } />
       <Route path="/explorar/comidas/area" component={ Origem } />
       <Route path="/explorar/comidas" component={ Filtrar } />
+      <Route path="/explorar/bebidas/area" component={ NotFound } />
       <Route path="/explorar/bebidas" component={ Filtrar } />
       <Route path="/explorar" component={ Explorar } />
       <Route path="/perfil" component={ Perfil } />

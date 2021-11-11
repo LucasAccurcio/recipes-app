@@ -6,15 +6,18 @@ import { useHistory } from 'react-router';
 
 function CardReceita(props) {
   const { name, img, index, id } = props;
-  const history = useHistory();
-  const { location: { pathname } } = history;
+  const { location: { pathname } } = useHistory();
+  const sizePath = 4;
+  const rota = pathname.split('/');
 
   return (
-    <Link to={ { pathname: `${pathname}/${id}`, state: { id } } }>
-      <Card
-        data-testid={ `${index}-recipe-card` }
-        style={ { margin: '5px', width: '10rem' } }
-      >
+    <Link
+      to={ {
+        pathname: `${rota.length === sizePath ? '/comidas' : pathname}/${id}`,
+        state: { id },
+      } }
+    >
+      <Card data-testid={ `${index}-recipe-card` } style={ { width: '10rem' } }>
         <Card.Img
           data-testid={ `${index}-card-img` }
           variant="top"
