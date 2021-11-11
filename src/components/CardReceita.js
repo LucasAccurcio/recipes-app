@@ -24,9 +24,11 @@ function CardReceita(props) {
           src={ img }
         />
         <Card.Body>
-          <Card.Title data-testid={ `${index}-card-name` }>
-            { name }
-          </Card.Title>
+          <div data-testid={ `${index}-recomendation-title` }>
+            <Card.Title data-testid={ `${index}-card-name` }>
+              { name }
+            </Card.Title>
+          </div>
         </Card.Body>
       </Card>
     </Link>

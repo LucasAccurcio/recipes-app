@@ -76,6 +76,7 @@
   max-height: 640px;
   max-width: 360px;
   overflow: scroll;
+  overflow-x: hidden;
   width: 100%;
 }
 
@@ -133,6 +134,7 @@ h1 {
 
 .ingredients {
   background-color: gray;
+  color: white;
   display: flex;
   flex-direction: column;
   padding: 4px;
@@ -240,5 +242,45 @@ header section button {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  margin: 2px;
+}
+
+.modal-container {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100vw;
+}
+
+
+.modal-container .modal-content {
+  align-items: center;
+  background-color: #ffffff;
+  display: flex;
+  height: 80px;
+  justify-content: center;
+  max-height: 640px;
+  max-width: 360px;
+  width: 160px;
+}
+
+.modal-text p {
+  font-size: 20px;
+  margin: 0;
+}
+
+.carousel {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 0 5px;
+  max-width: 360px;
+  overflow: scroll;
+  overflow-y: hidden;
+  width: 320px;
 }
