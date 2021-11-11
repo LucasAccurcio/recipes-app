@@ -239,9 +239,11 @@ header section button {
 }
 
 .card-container {
+  background-color: red;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+  padding: 2px;
 }
 
 .modal-container {
@@ -260,7 +262,7 @@ header section button {
 
 .modal-container .modal-content {
   align-items: center;
-  background-color: #ffffff;
+  background-color: white;
   display: flex;
   height: 80px;
   justify-content: center;
@@ -280,7 +282,11 @@ header section button {
   justify-content: flex-start;
   margin: 0 5px;
   max-width: 360px;
-  overflow: scroll;
-  overflow-y: hidden;
+  overflow: auto;
   width: 320px;
+}
+
+.recomendation {
+  margin: 5px;
+  width: 155px;
 }

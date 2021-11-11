@@ -17,7 +17,7 @@ function CardReceita(props) {
         state: { id },
       } }
     >
-      <Card data-testid={ `${index}-recipe-card` } style={ { width: '10rem' } }>
+      <Card data-testid={ `${index}-recipe-card` } className="recomendation">
         <Card.Img
           data-testid={ `${index}-card-img` }
           variant="top"
