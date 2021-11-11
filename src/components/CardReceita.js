@@ -11,7 +11,10 @@ function CardReceita(props) {
 
   return (
     <Link to={ { pathname: `${pathname}/${id}`, state: { id } } }>
-      <Card data-testid={ `${index}-recipe-card` } style={ { width: '10rem' } }>
+      <Card
+        data-testid={ `${index}-recipe-card` }
+        style={ { margin: '5px', width: '10rem' } }
+      >
         <Card.Img
           data-testid={ `${index}-card-img` }
           variant="top"
