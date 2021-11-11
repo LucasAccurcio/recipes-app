@@ -25,6 +25,7 @@ const Provider = ({ children }) => {
     setData,
     recipeType,
     setRecipeType,
+    getDataFromAPI,
   };
 
   useEffect(() => {

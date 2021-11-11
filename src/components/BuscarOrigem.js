@@ -3,7 +3,7 @@ import Context from '../context/Context';
 import fetchAPI from '../services/fetchAPI';
 
 function BuscarOrigem() {
-  const { data, setData } = useContext(Context);
+  const { data, setData, getDataFromAPI } = useContext(Context);
   const [origem, setOrigem] = useState();
   const [area, setArea] = useState();
 
@@ -18,12 +18,16 @@ function BuscarOrigem() {
 
   useEffect(() => {
     async function getComidasArea(origin) {
-      const URL_COMIDA_AREA = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${origin}`;
-      const listMeals = await fetchAPI(URL_COMIDA_AREA);
-      setData({
-        ...data,
-        meals: listMeals.meals,
-      });
+      if (origin === 'All') {
+        await getDataFromAPI();
+      } else {
+        const URL_COMIDA_AREA = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${origin}`;
+        const listMeals = await fetchAPI(URL_COMIDA_AREA);
+        setData({
+          ...data,
+          meals: listMeals.meals,
+        });
+      }
     }
     getComidasArea(area);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -41,6 +45,7 @@ function BuscarOrigem() {
         data-testid="explore-by-area-dropdown"
         onChange={ handleChangeSelect }
       >
+        <option data-testid="All-option" value="All">All</option>
         { origem.meals.map(({ strArea }, index) => (
           <option data-testid={ `${strArea}-option` } key={ index } value={ strArea }>
             {strArea}
