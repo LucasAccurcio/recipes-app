@@ -84,10 +84,12 @@ h1 {
 .start-btn {
   background-color: #0fa36b;
   border: 0;
+  bottom: 0;
   color: white;
   font-size: 30px;
   height: 70px;
   margin: 10px;
+  position: fixed;
   transition: background-color 0.5s;
   width: 95%;
 }

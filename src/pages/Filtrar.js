@@ -33,10 +33,12 @@ function Filtrar() {
     const URL_BEBIDA = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
     if (isPageDrinks) {
       const bebida = await fetchAPI(URL_BEBIDA);
-      history.push(bebida.drinks[0].idDrink);
+      history.push(`/bebidas/${bebida.drinks[0].idDrink}`);
     }
-    const comida = await fetchAPI(URL_COMIDA);
-    history.push(`/comidas/${comida.meals[0].idMeal}`);
+    if (!isPageDrinks) {
+      const comida = await fetchAPI(URL_COMIDA);
+      history.push(`/comidas/${comida.meals[0].idMeal}`);
+    }
   }
 
   return (
