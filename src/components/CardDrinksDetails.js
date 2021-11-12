@@ -73,8 +73,9 @@ function CardDrinksDetails(props) {
       <div className="ingredient-container">
         {/* data-testid={ `${index}-ingredient-name-and-measure` }  */}
         <h5>Ingredientes</h5>
-        { getIngredientes(drinks).map((item, index) => (
-          item !== 'null - null'
+        <div className="ingredients">
+          { getIngredientes(drinks).map((item, index) => (
+            item !== 'null - null'
           && (
             <p
               key={ index }
@@ -83,7 +84,8 @@ function CardDrinksDetails(props) {
               {item}
             </p>
           )
-        )) }
+          )) }
+        </div>
       </div>
       <div className="instructions">
         <p data-testid="instructions">{drinks.strInstructions}</p>
