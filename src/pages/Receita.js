@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router';
 import ComidaContainer from '../components/ComidaContainer';
+import CardDrinksDetails from '../components/CardDrinksDetails';
 import fetchAPI from '../services/fetchAPI';
 import '../App.css';
 
 function Receitas() {
+  const { location: { pathname } } = useHistory();
   const { id } = useParams();
-  const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const URL_MEALS = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const URL_DRINKS = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
   const [comida, setComida] = useState([]);
+  const [drinks, setDrinks] = useState([]);
   const [loading, setLoading] = useState(false);
 
   function fetchComida(data) {
@@ -16,12 +20,31 @@ function Receitas() {
     setLoading(true);
   }
 
+  function fetchDrinks(endpoint) {
+    fetchAPI(endpoint)
+      .then((response) => setDrinks(response.drinks[0]));
+    setLoading(true);
+  }
+
+  useEffect(() => {
+    if (pathname.includes('comidas')) {
+      fetchComida(URL_MEALS);
+    } else {
+      fetchDrinks(URL_DRINKS);
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => fetchComida(url), []);
+  }, []);
+
+  function showRecipes(path) {
+    if (path.includes('/comidas')) {
+      return (<ComidaContainer comida={ comida } />);
+    }
+    return (<CardDrinksDetails drinks={ drinks } />);
+  }
 
   return (
     <section className="recipe-container">
-      {!loading ? <p>loading</p> : <ComidaContainer comida={ comida } />}
+      {!loading ? <p>loading</p> : showRecipes(pathname) }
     </section>
   );
 }

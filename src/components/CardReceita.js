@@ -17,16 +17,18 @@ function CardReceita(props) {
         state: { id },
       } }
     >
-      <Card data-testid={ `${index}-recipe-card` } style={ { width: '10rem' } }>
+      <Card data-testid={ `${index}-recipe-card` } className="recomendation">
         <Card.Img
           data-testid={ `${index}-card-img` }
           variant="top"
           src={ img }
         />
         <Card.Body>
-          <Card.Title data-testid={ `${index}-card-name` }>
-            { name }
-          </Card.Title>
+          <div data-testid={ `${index}-recomendation-title` }>
+            <Card.Title data-testid={ `${index}-card-name` }>
+              { name }
+            </Card.Title>
+          </div>
         </Card.Body>
       </Card>
     </Link>

@@ -7,7 +7,6 @@ import Context from '../context/Context';
 
 function Bebidas() {
   const { data: { drinks } } = useContext(Context);
-
   function showDrinks() {
     const MAX_DRINKS = 12;
     return (

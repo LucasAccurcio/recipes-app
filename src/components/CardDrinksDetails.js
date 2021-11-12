@@ -5,15 +5,15 @@ import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import RecomendationCard from './RecomendationCard';
 
-function ComidaContainer(props) {
-  const { comida } = props;
+function CardDrinksDetails(props) {
+  const { drinks } = props;
   const favorite = whiteHeartIcon;
   const [modal, setModal] = useState(false);
   const THREE_SECONDS = 3000;
 
   function getIngredientes(list) {
     const ingredientes = [];
-    const NUMBER_OF_INGREDIENTS = 20;
+    const NUMBER_OF_INGREDIENTS = 15;
     for (let index = 1; index <= NUMBER_OF_INGREDIENTS; index += 1) {
       const ingred = list[`strIngredient${index}`];
       const quantidade = list[`strMeasure${index}`];
@@ -30,17 +30,18 @@ function ComidaContainer(props) {
       <img
         data-testid="recipe-photo"
         className="image-recipe"
-        src={ comida.strMealThumb }
+        src={ drinks.strDrinkThumb }
         alt="receita"
       />
       <div className="title-container">
         <div className="text-container">
-          <h2 className="margin-txt" data-testid="recipe-title">{comida.strMeal}</h2>
+          <h2 className="margin-txt" data-testid="recipe-title">{drinks.strDrink}</h2>
           <h4
             className="category margin-txt"
             data-testid="recipe-category"
           >
-            {comida.strCategory}
+            {drinks.strCategory}
+            {` (${drinks.strAlcoholic})`}
           </h4>
         </div>
         <button
@@ -70,33 +71,34 @@ function ComidaContainer(props) {
         </button>
       </div>
       <div className="ingredient-container">
+        {/* data-testid={ `${index}-ingredient-name-and-measure` }  */}
         <h5>Ingredientes</h5>
         <div className="ingredients">
-          { getIngredientes(comida).map((item, index) => (
+          { getIngredientes(drinks).map((item, index) => (
             item !== 'null - null'
-            && (
-              <p
-                key={ index }
-                data-testid={ `${index}-ingredient-name-and-measure` }
-              >
-                {item}
-              </p>
-            )
+          && (
+            <p
+              key={ index }
+              data-testid={ `${index}-ingredient-name-and-measure` }
+            >
+              {item}
+            </p>
+          )
           )) }
         </div>
       </div>
       <div className="instructions">
-        <p data-testid="instructions">{comida.strInstructions}</p>
+        <p data-testid="instructions">{drinks.strInstructions}</p>
       </div>
-      <iframe
+      {/* <iframe
         data-testid="video"
-        src={ comida.strYoutube }
-        title={ comida.strMeal }
+        src={ drinks.strYoutube }
+        title={ drinks.strDrinks }
         width="100%"
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media;"
         allowFullScreen
-      />
+      /> */}
       <RecomendationCard />
       <div className="start-btn-container">
         <button
@@ -111,8 +113,8 @@ function ComidaContainer(props) {
   );
 }
 
-ComidaContainer.propTypes = {
-  comida: PropTypes.objectOf().isRequired,
+CardDrinksDetails.propTypes = {
+  drinks: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
-export default ComidaContainer;
+export default CardDrinksDetails;
