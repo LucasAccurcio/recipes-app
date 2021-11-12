@@ -106,7 +106,7 @@ function CardDrinksDetails(props) {
           type="button"
           data-testid="start-recipe-btn"
         >
-          Começar Receita
+          Iniciar Receita
         </button>
       </div>
     </div>
