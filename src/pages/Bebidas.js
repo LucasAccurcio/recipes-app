@@ -6,7 +6,15 @@ import CardReceita from '../components/CardReceita';
 import Context from '../context/Context';
 
 function Bebidas() {
-  const { data: { drinks } } = useContext(Context);
+  const { data: { drinks }, recipeIngredients } = useContext(Context);
+
+  function selectRecipe() {
+    if (recipeIngredients.drinks.length > 0) {
+      return recipeIngredients.drinks;
+    }
+    return drinks;
+  }
+
   function showDrinks() {
     const MAX_DRINKS = 12;
     return (
@@ -14,7 +22,7 @@ function Bebidas() {
         <Header componentName="Bebidas" />
         <CategoryFilter url="https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list" />
         <section className="card-container">
-          { drinks.map(({ strDrink, strDrinkThumb, idDrink }, index) => (
+          { selectRecipe().map(({ strDrink, strDrinkThumb, idDrink }, index) => (
             index < MAX_DRINKS
           && <CardReceita
             key={ index }

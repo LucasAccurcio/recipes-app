@@ -6,7 +6,14 @@ import Header from '../components/Header';
 import Context from '../context/Context';
 
 function Comidas() {
-  const { data: { meals } } = useContext(Context);
+  const { data: { meals }, recipeIngredients } = useContext(Context);
+
+  function selectRecipes() {
+    if (recipeIngredients.meals.length > 0) {
+      return recipeIngredients.meals;
+    }
+    return meals;
+  }
 
   function showReceitas() {
     const MAX_MEALS = 12;
@@ -15,7 +22,7 @@ function Comidas() {
         <Header componentName="Comidas" />
         <CategoryFilter url="https://www.themealdb.com/api/json/v1/1/list.php?c=list" />
         <section className="card-container">
-          { meals.map(({ strMeal, strMealThumb, idMeal }, index) => (
+          { selectRecipes().map(({ strMeal, strMealThumb, idMeal }, index) => (
             index < MAX_MEALS
           && <CardReceita
             key={ index }
