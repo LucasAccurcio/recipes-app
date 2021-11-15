@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 import PropTypes from 'prop-types';
 import Modal from './Modal';
 import shareIcon from '../images/shareIcon.svg';
@@ -6,6 +7,7 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import RecomendationCard from './RecomendationCard';
 
 function ComidaContainer(props) {
+  const history = useHistory();
   const { comida } = props;
   const favorite = whiteHeartIcon;
   const [modal, setModal] = useState(false);
@@ -22,6 +24,17 @@ function ComidaContainer(props) {
       }
     }
     return ingredientes;
+  }
+
+  function startRecipe(id) {
+    history.push(`/comidas/${id}/in-progress`);
+  }
+
+  function renderTextButton(idToRender) {
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const { meals } = inProgressRecipes;
+    if (Object.keys(meals)[0] === idToRender) return true;
+    return false;
   }
 
   return (
@@ -103,8 +116,9 @@ function ComidaContainer(props) {
           className="start-btn"
           type="button"
           data-testid="start-recipe-btn"
+          onClick={ () => startRecipe(comida.idMeal) }
         >
-          Iniciar Receita
+          { renderTextButton(comida.idMeal) ? 'Continuar Receita' : 'Iniciar Receita' }
         </button>
       </div>
     </div>
