@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 import PropTypes from 'prop-types';
 import Modal from './Modal';
 import shareIcon from '../images/shareIcon.svg';
@@ -6,6 +7,7 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import RecomendationCard from './RecomendationCard';
 
 function CardDrinksDetails(props) {
+  const history = useHistory();
   const { drinks } = props;
   const favorite = whiteHeartIcon;
   const [modal, setModal] = useState(false);
@@ -22,6 +24,17 @@ function CardDrinksDetails(props) {
       }
     }
     return ingredientes;
+  }
+
+  function startRecipe(id) {
+    history.push(`/bebidas/${id}/in-progress`);
+  }
+
+  function renderTextButton(idToRender) {
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const { cocktails } = inProgressRecipes;
+    if (Object.keys(cocktails)[0] === idToRender) return true;
+    return false;
   }
 
   return (
@@ -90,23 +103,15 @@ function CardDrinksDetails(props) {
       <div className="instructions">
         <p data-testid="instructions">{drinks.strInstructions}</p>
       </div>
-      {/* <iframe
-        data-testid="video"
-        src={ drinks.strYoutube }
-        title={ drinks.strDrinks }
-        width="100%"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media;"
-        allowFullScreen
-      /> */}
       <RecomendationCard />
       <div className="start-btn-container">
         <button
           className="start-btn"
           type="button"
           data-testid="start-recipe-btn"
+          onClick={ () => startRecipe(drinks.idDrink) }
         >
-          Iniciar Receita
+          { renderTextButton(drinks.idDrink) ? 'Continuar Receita' : 'Iniciar Receita' }
         </button>
       </div>
     </div>

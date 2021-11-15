@@ -17,8 +17,8 @@ import NotFound from '../pages/NotFound';
 function Routes() {
   return (
     <Switch>
-      <Route path="/comidas/:id/inProgress" component={ Preparando } />
-      <Route path="/bebidas/:id/inProgress" component={ Preparando } />
+      <Route path="/comidas/:id/in-progress" component={ Preparando } />
+      <Route path="/bebidas/:id/in-progress" component={ Preparando } />
       <Route path="/comidas/:id" component={ Receita } />
       <Route path="/bebidas/:id" component={ Receita } />
       <Route exact path="/comidas" component={ Comidas } />

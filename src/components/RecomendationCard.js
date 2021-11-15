@@ -56,6 +56,7 @@ export default function RecomendationCard() {
           index < MAX_RECOMENDATION
             && (
               <section
+                key={ index }
                 className="card-container"
                 data-testid={ `${index}-recomendation-card` }
               >
