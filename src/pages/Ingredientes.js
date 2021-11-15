@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import CardIngredients from '../components/CardIngredients';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import Context from '../context/Context';
 import fetchAPI from '../services/fetchAPI';
 
 function Ingredientes() {
+  const { recipeIngredients, setRecipeIngredients } = useContext(Context);
   const [ingredientsMeals, setIngredientesMeals] = useState();
   const [ingredientsDrinks, setIngredientsDrinks] = useState();
+  const history = useHistory();
   const { location: { pathname } } = useHistory();
   const URL_INGREDIENTS_MEALS = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
   const URL_INGREDIENTS_DRINKS = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
@@ -24,6 +27,20 @@ function Ingredientes() {
     }
   }
 
+  async function setRecipeMeal(ingredient) {
+    const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
+    const recipe = await fetchAPI(URL);
+    setRecipeIngredients({ ...recipeIngredients, meals: recipe.meals });
+    history.push('/comidas');
+  }
+
+  async function setRecipeDrink(ingredient) {
+    const URL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`;
+    const recipe = await fetchAPI(URL);
+    setRecipeIngredients({ ...recipeIngredients, drinks: recipe.drinks });
+    history.push('/bebidas');
+  }
+
   useEffect(() => {
     getIngredients();
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -36,12 +53,19 @@ function Ingredientes() {
         <section>
           { ingredientsMeals.map(({ strIngredient }, index) => (
             index < MAX_MEALS
-            && <CardIngredients
-              key={ index }
-              name={ strIngredient }
-              index={ index }
-              img={ `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` }
-            />
+            && (
+              <button
+                key={ index }
+                type="button"
+                onClick={ () => setRecipeMeal(strIngredient) }
+              >
+                <CardIngredients
+                  name={ strIngredient }
+                  index={ index }
+                  img={ `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` }
+                />
+              </button>
+            )
           )) }
         </section>
       );
@@ -51,14 +75,21 @@ function Ingredientes() {
         <section>
           { ingredientsDrinks.map(({ strIngredient1 }, index) => (
             index < MAX_MEALS
-            && <CardIngredients
-              key={ index }
-              name={ strIngredient1 }
-              index={ index }
-              img={
-                `https://www.thecocktaildb.com/images/ingredients/${strIngredient1}-Small.png`
-              }
-            />
+            && (
+              <button
+                key={ index }
+                type="button"
+                onClick={ () => setRecipeDrink(strIngredient1) }
+              >
+                <CardIngredients
+                  name={ strIngredient1 }
+                  index={ index }
+                  img={
+                    `https://www.thecocktaildb.com/images/ingredients/${strIngredient1}-Small.png`
+                  }
+                />
+              </button>
+            )
           )) }
         </section>
       );
