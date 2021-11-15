@@ -26,10 +26,10 @@ const Provider = ({ children }) => {
     if (localStorage.getItem('inProgressRecipes') === null) {
       localStorage.setItem('inProgressRecipes', JSON.stringify({
         cocktails: {
-          178319: [],
+          id: [],
         },
         meals: {
-          52771: [],
+          id: [],
         },
       }));
     }
