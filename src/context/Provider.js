@@ -16,6 +16,9 @@ const Provider = ({ children }) => {
 
   const [recipeType, setRecipeType] = useState();
 
+  const [comida, setComida] = useState([]);
+  const [drinks, setDrinks] = useState([]);
+
   const setInitialLocalStorage = () => {
     if (localStorage.getItem('doneRecipes') === null) {
       localStorage.setItem('doneRecipes', JSON.stringify([]));
@@ -46,7 +49,11 @@ const Provider = ({ children }) => {
 
   const context = {
     data,
+    drinks,
+    comida,
     setData,
+    setComida,
+    setDrinks,
     recipeType,
     setRecipeType,
     getDataFromAPI,

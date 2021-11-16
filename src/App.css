@@ -190,6 +190,7 @@ header section button {
   right: 0;
   top: 0;
   width: 100vw;
+  z-index: 1;
 }
 
 .modal-container .modal-content {

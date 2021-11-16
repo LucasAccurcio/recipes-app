@@ -53,7 +53,6 @@ function CardDrinksDetails(props) {
             className="category margin-txt"
             data-testid="recipe-category"
           >
-            {drinks.strCategory}
             {` (${drinks.strAlcoholic})`}
           </h4>
         </div>
