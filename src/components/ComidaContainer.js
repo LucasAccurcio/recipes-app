@@ -12,6 +12,7 @@ function ComidaContainer(props) {
   const favorite = whiteHeartIcon;
   const [modal, setModal] = useState(false);
   const THREE_SECONDS = 3000;
+  const yt = (`${comida.strYoutube}/`).split('watch?v=').join('embed/');
 
   function getIngredientes(list) {
     const ingredientes = [];
@@ -103,7 +104,7 @@ function ComidaContainer(props) {
       </div>
       <iframe
         data-testid="video"
-        src={ comida.strYoutube }
+        src={ yt }
         title={ comida.strMeal }
         width="100%"
         frameBorder="0"
