@@ -11,7 +11,7 @@ function Receitas() {
   const { id } = useParams();
   const URL_MEALS = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
   const URL_DRINKS = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
-  const { comida, setComida, drinks, setDrinks } = useContext(Context);
+  const { setComida, setDrinks } = useContext(Context);
   // const [comida, setComida] = useState([]); // passei essa linha para o Provider
   // const [drinks, setDrinks] = useState([]); // passei essa linha para o Provider
   const [loading, setLoading] = useState(false);
@@ -39,9 +39,9 @@ function Receitas() {
 
   function showRecipes(path) {
     if (path.includes('/comidas')) {
-      return (<ComidaContainer comida={ comida } />);
+      return (<ComidaContainer />);
     }
-    return (<CardDrinksDetails drinks={ drinks } />);
+    return (<CardDrinksDetails />);
   }
 
   return (

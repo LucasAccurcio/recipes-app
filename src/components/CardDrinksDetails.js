@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router';
-import PropTypes from 'prop-types';
 import Modal from './Modal';
 import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import RecomendationCard from './RecomendationCard';
+import Context from '../context/Context';
+import FavoriteDrinksButton from './FavoriteDrinksButton';
 
-function CardDrinksDetails(props) {
+function CardDrinksDetails() {
+  const { drinks } = useContext(Context);
   const history = useHistory();
-  const { drinks } = props;
-  const favorite = whiteHeartIcon;
   const [modal, setModal] = useState(false);
   const THREE_SECONDS = 3000;
 
@@ -73,14 +72,7 @@ function CardDrinksDetails(props) {
             alt="share icon"
           />
         </button>
-        <button type="button">
-          <img
-            data-testid="favorite-btn"
-            className="icon"
-            src={ favorite }
-            alt="favorite"
-          />
-        </button>
+        <FavoriteDrinksButton />
       </div>
       <div className="ingredient-container">
         {/* data-testid={ `${index}-ingredient-name-and-measure` }  */}
@@ -116,9 +108,5 @@ function CardDrinksDetails(props) {
     </div>
   );
 }
-
-CardDrinksDetails.propTypes = {
-  drinks: PropTypes.objectOf(PropTypes.any).isRequired,
-};
 
 export default CardDrinksDetails;
