@@ -4,8 +4,8 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import Context from '../context/Context';
 
-function Button() {
-  const { comida } = useContext(Context);
+function FavoriteDrinksButton() {
+  const { drinks } = useContext(Context);
   const [favorito, setFavorito] = useState({
     img: whiteHeartIcon,
     isFavorite: false,
@@ -49,18 +49,18 @@ function Button() {
       });
 
       const setData = {
-        id: comida.idMeal,
-        type: 'comida',
-        area: comida.strArea,
-        category: comida.strCategory,
-        alcoholicOrNot: '',
-        name: comida.strMeal,
-        image: comida.strMealThumb,
+        id: drinks.idDrink,
+        type: 'bebida',
+        area: '',
+        category: drinks.strCategory,
+        alcoholicOrNot: drinks.strAlcoholic,
+        name: drinks.strDrink,
+        image: drinks.strDrinkThumb,
       };
       localStorage
         .setItem('favoriteRecipes', JSON.stringify([...getLocalStorage, setData]));
     } else {
-      const newStorage = getLocalStorage.filter((recipe) => recipe.id !== comida.idMeal);
+      const newStorage = getLocalStorage.filter((recipe) => recipe.id !== drinks.idDrink);
       localStorage
         .setItem('favoriteRecipes', JSON.stringify(newStorage));
       setFavorito({
@@ -90,4 +90,4 @@ function Button() {
   );
 }
 
-export default Button;
+export default FavoriteDrinksButton;

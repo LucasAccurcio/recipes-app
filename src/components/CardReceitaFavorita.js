@@ -6,7 +6,7 @@ import Modal from './Modal';
 import shareIcon from '../images/shareIcon.svg';
 
 function CardReceitaFavorita(props) {
-  const { name, img, category, index } = props;
+  const { name, img, category, alcoholic, index } = props;
   const [modal, setModal] = useState(false);
   const THREE_SECONDS = 3000;
 
@@ -22,6 +22,9 @@ function CardReceitaFavorita(props) {
           <Card.Title data-testid={ `${index}-horizontal-name` }>
             { name }
           </Card.Title>
+          <Card.Text>
+            { alcoholic }
+          </Card.Text>
           <button
             type="button"
             onClick={ () => {
@@ -51,6 +54,7 @@ CardReceitaFavorita.propTypes = {
   img: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
+  alcoholic: PropTypes.string.isRequired,
 };
 
 export default CardReceitaFavorita;
