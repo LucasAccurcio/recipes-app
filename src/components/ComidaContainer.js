@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router';
-import PropTypes from 'prop-types';
 import Modal from './Modal';
+import Button from './Button';
 import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import RecomendationCard from './RecomendationCard';
+import Context from '../context/Context';
 
-function ComidaContainer(props) {
+function ComidaContainer() {
   const history = useHistory();
-  const { comida } = props;
-  const favorite = whiteHeartIcon;
+  const { comida } = useContext(Context);
   const [modal, setModal] = useState(false);
   const THREE_SECONDS = 3000;
   const yt = (`${comida.strYoutube}/`).split('watch?v=').join('embed/');
@@ -26,7 +25,6 @@ function ComidaContainer(props) {
     }
     return ingredientes;
   }
-
   function startRecipe(id) {
     history.push(`/comidas/${id}/in-progress`);
   }
@@ -37,7 +35,6 @@ function ComidaContainer(props) {
     if (Object.keys(meals)[0] === idToRender) return true;
     return false;
   }
-
   return (
     <div>
       <Modal modal={ modal } />
@@ -74,14 +71,7 @@ function ComidaContainer(props) {
             alt="share icon"
           />
         </button>
-        <button type="button">
-          <img
-            data-testid="favorite-btn"
-            className="icon"
-            src={ favorite }
-            alt="favorite"
-          />
-        </button>
+        <Button />
       </div>
       <div className="ingredient-container">
         <h5>Ingredientes</h5>
@@ -125,9 +115,5 @@ function ComidaContainer(props) {
     </div>
   );
 }
-
-ComidaContainer.propTypes = {
-  comida: PropTypes.objectOf().isRequired,
-};
 
 export default ComidaContainer;
