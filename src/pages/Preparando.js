@@ -1,33 +1,20 @@
 import React from 'react';
-// import { useHistory } from 'react-router';
-// import PreparandoComida from '../components/PreparandoComida';
+import { useHistory } from 'react-router';
+import PreparandoComida from '../components/PreparandoComida';
+import PreparandoBebida from '../components/PreparandoBebida';
 
 function Preparando() {
-  // const history = useHistory();
-  // const { location: { pathname } } = history;
+  const history = useHistory();
+  const { location: { pathname } } = history;
 
-  // if (pathname.includes('/comidas')) {
+  if (pathname.includes('/comidas')) {
+    return (
+      <PreparandoComida />
+    );
+  }
   return (
-    <section>
-      <h1>Preparando</h1>
-      <div className="ingredients">
-        <label htmlFor="checkbox">
-          <input type="checkbox" name="checkbox" />
-          Ingredientes
-        </label>
-        <label htmlFor="checkbox">
-          <input type="checkbox" name="checkbox" />
-          Ingredientes
-        </label>
-        <label htmlFor="checkbox">
-          <input type="checkbox" name="checkbox" />
-          Ingredientes
-        </label>
-      </div>
-      {/* <PreparandoComida /> */}
-    </section>
+    <PreparandoBebida />
   );
-  // }
 }
 
 export default Preparando;

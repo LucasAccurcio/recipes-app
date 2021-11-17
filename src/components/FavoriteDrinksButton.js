@@ -19,13 +19,9 @@ function FavoriteDrinksButton() {
   );
 
   function renderButton() {
-    // let idPage = '';
-    // if (pathname.includes('comidas')) {
-    //   idPage = pathname.split('/comidas/')[1];
-    // } else {
-    //   idPage = pathname.split('/bebidas/')[1];
-    // }
-    console.log(idPage);
+    if (localStorage.getItem('favoriteRecipes') === null) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+    }
     const getLocalStorageData = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (getLocalStorageData.some(({ id }) => idPage === id)) {
       setFavorito({
