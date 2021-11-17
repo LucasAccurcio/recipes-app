@@ -4,18 +4,12 @@ import CardComidaFavorita from '../components/CardComidaFavorita';
 import CardBebidaFavorita from '../components/CardBebidaFavorita';
 
 function ReceitasFavoritas() {
-  function getFavorite() {
-    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (favoriteRecipes.length === 0) {
-      return global.alert('Não existem receitas favoritas');
-    }
-    return favoriteRecipes;
-  }
+  const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
   function showRecipeFavorite() {
     return (
       <section>
-        { getFavorite().map((recipe, index) => (
+        {favoriteRecipes && favoriteRecipes.map((recipe, index) => (
           (recipe.type === 'comida'
             ? <CardComidaFavorita key={ index } meal={ recipe } index={ index } />
             : <CardBebidaFavorita key={ index } drink={ recipe } index={ index } />)
