@@ -12,14 +12,19 @@ function Button() {
   });
   const history = useHistory();
   const { location: { pathname } } = history;
+  const idPage = (
+    pathname.includes('comidas')
+      ? pathname.split('/comidas/')[1]
+      : pathname.split('/bebidas/')[1]
+  );
 
   function renderButton() {
-    let idPage = '';
-    if (pathname.includes('comidas')) {
-      idPage = pathname.split('/comidas/')[1];
-    } else {
-      idPage = pathname.split('/bebidas/')[1];
-    }
+    // let idPage = '';
+    // if (pathname.includes('comidas')) {
+    //   idPage = pathname.split('/comidas/')[1];
+    // } else {
+    //   idPage = pathname.split('/bebidas/')[1];
+    // }
     console.log(idPage);
     const getLocalStorageData = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (getLocalStorageData.some(({ id }) => idPage === id)) {
