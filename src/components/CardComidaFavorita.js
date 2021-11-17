@@ -1,29 +1,26 @@
 import React, { useState } from 'react';
 import { Card } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import Button from './Button';
 import Modal from './Modal';
 import shareIcon from '../images/shareIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-function CardReceitaFavorita(props) {
-  const { name, img, category, alcoholic, index } = props;
+function CardComidaFavorita(props) {
+  const { meal: { image, name, category, area }, index } = props;
   const [modal, setModal] = useState(false);
   const THREE_SECONDS = 3000;
 
   return (
     <section>
       <Modal modal={ modal } />
-      <Card style={ { width: '18rem' } }>
-        <Card.Img data-testid={ `${index}-horizontal-image` } src={ img } />
+      <Card style={ { width: '10rem' } }>
+        <Card.Img data-testid={ `${index}-horizontal-image` } src={ image } />
         <Card.Body>
-          <Card.Title data-testid={ `${index}-horizontal-top-text` }>
-            { category }
-          </Card.Title>
           <Card.Title data-testid={ `${index}-horizontal-name` }>
             { name }
           </Card.Title>
-          <Card.Text>
-            { alcoholic }
+          <Card.Text data-testid={ `${index}-horizontal-top-text` }>
+            { `${area} - ${category}` }
           </Card.Text>
           <button
             type="button"
@@ -36,25 +33,36 @@ function CardReceitaFavorita(props) {
             } }
           >
             <img
-              data-testid="share-btn"
+              data-testid={ `${index}-horizontal-share-btn` }
               className="icon"
               src={ shareIcon }
               alt="share icon"
             />
           </button>
-          <Button />
+          <button
+            type="button"
+          >
+            <img
+              data-testid={ `${index}-horizontal-favorite-btn` }
+              className="icon"
+              src={ blackHeartIcon }
+              alt="favorite"
+            />
+          </button>
         </Card.Body>
       </Card>
     </section>
   );
 }
 
-CardReceitaFavorita.propTypes = {
-  name: PropTypes.string.isRequired,
-  img: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
+CardComidaFavorita.propTypes = {
+  meal: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    area: PropTypes.string.isRequired,
+  }).isRequired,
   index: PropTypes.number.isRequired,
-  alcoholic: PropTypes.string.isRequired,
 };
 
-export default CardReceitaFavorita;
+export default CardComidaFavorita;
