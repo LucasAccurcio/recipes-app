@@ -22,6 +22,10 @@ function PreparandoBebida() {
     setLoading(true);
   }
 
+  function riskLabel(e) {
+    console.log(e.target);
+  }
+
   useEffect(() => {
     fetchDrinks(URL_DRINKS);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -85,12 +89,17 @@ function PreparandoBebida() {
             { loading && getIngredientes(drinks).map((item, index) => (
               item !== 'null - null'
             && (
-              <label htmlFor={ item } key={ index }>
+              <label
+                key={ index }
+                htmlFor={ item }
+                data-testid={ `${index}-ingredient-step` }
+                style={ riskLine }
+              >
                 <input
                   type="checkbox"
                   id={ item }
-                  data-testid={ `${index}-ingredient-step` }
                   name={ item }
+                  onClick={ riskLabel }
                 />
                 { item }
               </label>

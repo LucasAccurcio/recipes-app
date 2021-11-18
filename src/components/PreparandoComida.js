@@ -85,11 +85,15 @@ function PreparandoComida() {
             { loading && getIngredientes().map((item, index) => (
               item !== 'null - null'
             && (
-              <label htmlFor={ item } key={ index }>
+              <label
+                htmlFor={ item }
+                key={ index }
+                data-testid={ `${index}-ingredient-step` }
+                style={ { textDecoration: 'line-through' } }
+              >
                 <input
                   type="checkbox"
                   id={ item }
-                  data-testid={ `${index}-ingredient-step` }
                   name="checkbox"
                 />
                 { item }
