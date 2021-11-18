@@ -46,10 +46,10 @@ function ReceitasFavoritas() {
   }
 
   function showRecipeFilter() {
-    const { recipe } = filter;
+    const { recipe, isFilter } = filter;
     return (
       <section className="card-container">
-        {recipe.map((meal, index) => (
+        { isFilter && recipe.map((meal, index) => (
           (recipe.type === 'comida'
             ? <CardComidaFavorita key={ index } meal={ meal } index={ index } />
             : <CardBebidaFavorita key={ index } drink={ meal } index={ index } />)
@@ -84,8 +84,8 @@ function ReceitasFavoritas() {
           Drinks
         </button>
       </section>
-      { filter.isFilter && showRecipeFilter() }
-      { showRecipeFavorite() }
+      { favoriteRecipes && showRecipeFilter() }
+      { favoriteRecipes && showRecipeFavorite() }
     </section>
   );
 }
