@@ -41,7 +41,7 @@ function CardComidaFavorita(props) {
         <button
           type="button"
           onClick={ () => {
-            window.navigator.clipboard.writeText(window.location.href);
+            window.navigator.clipboard.writeText(`http://localhost:3000/comidas/${id}`);
             setModal(true);
             setTimeout(() => {
               setModal(false);
