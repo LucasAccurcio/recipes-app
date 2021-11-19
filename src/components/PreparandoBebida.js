@@ -22,8 +22,15 @@ function PreparandoBebida() {
     setLoading(true);
   }
 
-  function riskLabel(e) {
-    console.log(e.target);
+  function riskLabel(e, idLabel) {
+    const { target: { checked } } = e;
+    if (checked) {
+      document
+        .getElementsByClassName(idLabel)[0].style.textDecoration = 'line-through';
+    } else {
+      document
+        .getElementsByClassName(idLabel)[0].style.textDecoration = 'none';
+    }
   }
 
   useEffect(() => {
@@ -92,14 +99,15 @@ function PreparandoBebida() {
               <label
                 key={ index }
                 htmlFor={ item }
+                className={ item }
                 data-testid={ `${index}-ingredient-step` }
-                style={ riskLine }
+                style={ { textDecoration: 'none' } }
               >
                 <input
-                  type="checkbox"
                   id={ item }
                   name={ item }
-                  onClick={ riskLabel }
+                  type="checkbox"
+                  onClick={ (e) => riskLabel(e, item) }
                 />
                 { item }
               </label>
