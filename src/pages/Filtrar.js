@@ -9,7 +9,6 @@ function Filtrar() {
   const history = useHistory();
   const { location: { pathname } } = history;
   const isPageDrinks = pathname === '/explorar/bebidas';
-  // console.log(pathname);
 
   let atualComponent = 'Explorar';
   if (pathname === ('/explorar/comidas')) {
