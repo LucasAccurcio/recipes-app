@@ -22,6 +22,17 @@ function PreparandoBebida() {
     setLoading(true);
   }
 
+  function riskLabel(e, idLabel) {
+    const { target: { checked } } = e;
+    if (checked) {
+      document
+        .getElementsByClassName(idLabel)[0].style.textDecoration = 'line-through';
+    } else {
+      document
+        .getElementsByClassName(idLabel)[0].style.textDecoration = 'none';
+    }
+  }
+
   useEffect(() => {
     fetchDrinks(URL_DRINKS);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -85,12 +96,18 @@ function PreparandoBebida() {
             { loading && getIngredientes(drinks).map((item, index) => (
               item !== 'null - null'
             && (
-              <label htmlFor={ item } key={ index }>
+              <label
+                key={ index }
+                htmlFor={ item }
+                className={ item }
+                data-testid={ `${index}-ingredient-step` }
+                style={ { textDecoration: 'none' } }
+              >
                 <input
-                  type="checkbox"
                   id={ item }
-                  data-testid={ `${index}-ingredient-step` }
                   name={ item }
+                  type="checkbox"
+                  onClick={ (e) => riskLabel(e, item) }
                 />
                 { item }
               </label>
