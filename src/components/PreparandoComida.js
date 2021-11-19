@@ -7,7 +7,7 @@ import Button from './Button';
 import fetchAPI from '../services/fetchAPI';
 
 function PreparandoComida() {
-  const { comida, setComida } = useContext(Context);
+  const { comida, setComida, setInitialLocalStorage } = useContext(Context);
   const [loading, setLoading] = useState(false);
   const [modal, setModal] = useState(false);
   const THREE_SECONDS = 3000;
@@ -20,16 +20,40 @@ function PreparandoComida() {
     fetchAPI(data)
       .then((response) => setComida(response.meals[0]));
     setLoading(true);
+    setInitialLocalStorage();
   }
 
-  function riskLabel(e, idLabel) {
+  function riskLabel(e, item) {
     const { target: { checked } } = e;
+    const getLocalStorageData = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const itensDone = getLocalStorageData.meals[idPage];
     if (checked) {
+      let newItensDone = [];
       document
-        .getElementsByClassName(idLabel)[0].style.textDecoration = 'line-through';
+        .getElementsByClassName(item)[0]
+        .style.textDecoration = 'line-through';
+      if (itensDone === undefined) {
+        newItensDone = [item];
+      } else {
+        newItensDone = [...itensDone, item];
+      }
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        ...getLocalStorageData,
+        meals: {
+          [idPage]: newItensDone,
+        },
+      }));
     } else {
       document
-        .getElementsByClassName(idLabel)[0].style.textDecoration = 'none';
+        .getElementsByClassName(item)[0]
+        .style.textDecoration = 'none';
+      const newItensDone = itensDone.filter((element) => element !== item);
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        ...getLocalStorageData,
+        meals: {
+          [idPage]: newItensDone,
+        },
+      }));
     }
   }
 

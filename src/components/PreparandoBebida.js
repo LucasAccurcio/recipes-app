@@ -7,7 +7,7 @@ import FavoriteDrinksButton from './FavoriteDrinksButton';
 import fetchAPI from '../services/fetchAPI';
 
 function PreparandoBebida() {
-  const { drinks, setDrinks } = useContext(Context);
+  const { drinks, setDrinks, setInitialLocalStorage } = useContext(Context);
   const [loading, setLoading] = useState(false);
   const [modal, setModal] = useState(false);
   const THREE_SECONDS = 3000;
@@ -16,20 +16,55 @@ function PreparandoBebida() {
   const idPage = pathname.split('/')[2];
   const URL_DRINKS = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idPage}`;
 
+  function loadRecipeStatus() {
+    const getLocalStorageData = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const itensDone = getLocalStorageData.cocktails[idPage];
+    itensDone.forEach((e) => {
+      console.log(e);
+      const inputCheck = document.getElementsByClassName(e);
+      console.log(inputCheck);
+    });
+  }
+
   function fetchDrinks(endpoint) {
     fetchAPI(endpoint)
       .then((response) => setDrinks(response.drinks[0]));
     setLoading(true);
+    setInitialLocalStorage();
+    loadRecipeStatus();
   }
 
-  function riskLabel(e, idLabel) {
+  function riskLabel(e, item) {
     const { target: { checked } } = e;
+    const getLocalStorageData = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const itensDone = getLocalStorageData.cocktails[idPage];
     if (checked) {
+      let newItensDone = [];
       document
-        .getElementsByClassName(idLabel)[0].style.textDecoration = 'line-through';
+        .getElementsByClassName(item)[0]
+        .style.textDecoration = 'line-through';
+      if (itensDone === undefined) {
+        newItensDone = [item];
+      } else {
+        newItensDone = [...itensDone, item];
+      }
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        ...getLocalStorageData,
+        cocktails: {
+          [idPage]: newItensDone,
+        },
+      }));
     } else {
       document
-        .getElementsByClassName(idLabel)[0].style.textDecoration = 'none';
+        .getElementsByClassName(item)[0]
+        .style.textDecoration = 'none';
+      const newItensDone = itensDone.filter((element) => element !== item);
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        ...getLocalStorageData,
+        cocktails: {
+          [idPage]: newItensDone,
+        },
+      }));
     }
   }
 

@@ -59,6 +59,7 @@ const Provider = ({ children }) => {
     getDataFromAPI,
     recipeIngredients,
     setRecipeIngredients,
+    setInitialLocalStorage,
   };
 
   useEffect(() => {
