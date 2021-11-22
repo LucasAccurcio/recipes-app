@@ -16,11 +16,27 @@ function PreparandoComida() {
   const idPage = pathname.split('/')[2];
   const URL_MEALS = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idPage}`;
 
+  function loadRecipeStatus() {
+    const getLocalStorageData = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (getLocalStorageData !== undefined) {
+      const itensDone = getLocalStorageData.meals[idPage];
+      if (itensDone !== undefined) {
+        itensDone.forEach((e) => {
+          const inputCheck = document.getElementsByClassName(e)[0];
+          if (inputCheck !== undefined) {
+            inputCheck.style.textDecoration = 'line-through';
+            inputCheck.firstChild.checked = true;
+          }
+        });
+      }
+    }
+  }
+
   function fetchComida(data) {
+    setInitialLocalStorage();
     fetchAPI(data)
       .then((response) => setComida(response.meals[0]));
     setLoading(true);
-    setInitialLocalStorage();
   }
 
   function riskLabel(e, item) {
@@ -57,11 +73,6 @@ function PreparandoComida() {
     }
   }
 
-  useEffect(() => {
-    fetchComida(URL_MEALS);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   function getIngredientes() {
     const ingredientes = [];
     const NUMBER_OF_INGREDIENTS = 15;
@@ -74,6 +85,19 @@ function PreparandoComida() {
     }
     return ingredientes;
   }
+
+  useEffect(() => {
+    fetchComida(URL_MEALS);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const ALMOST_ONE_SEC = 545;
+    setTimeout(() => {
+      loadRecipeStatus();
+    }, ALMOST_ONE_SEC);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading]);
 
   return (
     <section>

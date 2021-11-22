@@ -18,20 +18,25 @@ function PreparandoBebida() {
 
   function loadRecipeStatus() {
     const getLocalStorageData = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    const itensDone = getLocalStorageData.cocktails[idPage];
-    itensDone.forEach((e) => {
-      console.log(e);
-      const inputCheck = document.getElementsByClassName(e);
-      console.log(inputCheck);
-    });
+    if (getLocalStorageData !== undefined) {
+      const itensDone = getLocalStorageData.cocktails[idPage];
+      if (itensDone !== undefined) {
+        itensDone.forEach((e) => {
+          const inputCheck = document.getElementsByClassName(e)[0];
+          if (inputCheck !== undefined) {
+            inputCheck.style.textDecoration = 'line-through';
+            inputCheck.firstChild.checked = true;
+          }
+        });
+      }
+    }
   }
 
   function fetchDrinks(endpoint) {
+    setInitialLocalStorage();
     fetchAPI(endpoint)
       .then((response) => setDrinks(response.drinks[0]));
     setLoading(true);
-    setInitialLocalStorage();
-    loadRecipeStatus();
   }
 
   function riskLabel(e, item) {
@@ -68,11 +73,6 @@ function PreparandoBebida() {
     }
   }
 
-  useEffect(() => {
-    fetchDrinks(URL_DRINKS);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   function getIngredientes(list) {
     const ingredientes = [];
     const NUMBER_OF_INGREDIENTS = 15;
@@ -85,6 +85,19 @@ function PreparandoBebida() {
     }
     return ingredientes;
   }
+
+  useEffect(() => {
+    fetchDrinks(URL_DRINKS);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const ALMOST_ONE_SEC = 545;
+    setTimeout(() => {
+      loadRecipeStatus();
+    }, ALMOST_ONE_SEC);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading]);
 
   return (
     <section>
