@@ -7,7 +7,7 @@ import FavoriteDrinksButton from './FavoriteDrinksButton';
 import fetchAPI from '../services/fetchAPI';
 
 function PreparandoBebida() {
-  const { drinks, setDrinks } = useContext(Context);
+  const { drinks, setDrinks, setInitialLocalStorage } = useContext(Context);
   const [loading, setLoading] = useState(false);
   const [modal, setModal] = useState(false);
   const THREE_SECONDS = 3000;
@@ -16,27 +16,62 @@ function PreparandoBebida() {
   const idPage = pathname.split('/')[2];
   const URL_DRINKS = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idPage}`;
 
+  function loadRecipeStatus() {
+    const getLocalStorageData = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (getLocalStorageData !== undefined) {
+      const itensDone = getLocalStorageData.cocktails[idPage];
+      if (itensDone !== undefined) {
+        itensDone.forEach((e) => {
+          const inputCheck = document.getElementsByClassName(e)[0];
+          if (inputCheck !== undefined) {
+            inputCheck.style.textDecoration = 'line-through';
+            inputCheck.firstChild.checked = true;
+          }
+        });
+      }
+    }
+  }
+
   function fetchDrinks(endpoint) {
+    setInitialLocalStorage();
     fetchAPI(endpoint)
       .then((response) => setDrinks(response.drinks[0]));
     setLoading(true);
   }
 
-  function riskLabel(e, idLabel) {
+  function riskLabel(e, item) {
     const { target: { checked } } = e;
+    const getLocalStorageData = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const itensDone = getLocalStorageData.cocktails[idPage];
     if (checked) {
+      let newItensDone = [];
       document
-        .getElementsByClassName(idLabel)[0].style.textDecoration = 'line-through';
+        .getElementsByClassName(item)[0]
+        .style.textDecoration = 'line-through';
+      if (itensDone === undefined) {
+        newItensDone = [item];
+      } else {
+        newItensDone = [...itensDone, item];
+      }
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        ...getLocalStorageData,
+        cocktails: {
+          [idPage]: newItensDone,
+        },
+      }));
     } else {
       document
-        .getElementsByClassName(idLabel)[0].style.textDecoration = 'none';
+        .getElementsByClassName(item)[0]
+        .style.textDecoration = 'none';
+      const newItensDone = itensDone.filter((element) => element !== item);
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        ...getLocalStorageData,
+        cocktails: {
+          [idPage]: newItensDone,
+        },
+      }));
     }
   }
-
-  useEffect(() => {
-    fetchDrinks(URL_DRINKS);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   function getIngredientes(list) {
     const ingredientes = [];
@@ -50,6 +85,19 @@ function PreparandoBebida() {
     }
     return ingredientes;
   }
+
+  useEffect(() => {
+    fetchDrinks(URL_DRINKS);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const ALMOST_ONE_SEC = 545;
+    setTimeout(() => {
+      loadRecipeStatus();
+    }, ALMOST_ONE_SEC);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading]);
 
   return (
     <section>

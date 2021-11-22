@@ -7,7 +7,7 @@ import Button from './Button';
 import fetchAPI from '../services/fetchAPI';
 
 function PreparandoComida() {
-  const { comida, setComida } = useContext(Context);
+  const { comida, setComida, setInitialLocalStorage } = useContext(Context);
   const [loading, setLoading] = useState(false);
   const [modal, setModal] = useState(false);
   const THREE_SECONDS = 3000;
@@ -16,27 +16,62 @@ function PreparandoComida() {
   const idPage = pathname.split('/')[2];
   const URL_MEALS = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idPage}`;
 
+  function loadRecipeStatus() {
+    const getLocalStorageData = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (getLocalStorageData !== undefined) {
+      const itensDone = getLocalStorageData.meals[idPage];
+      if (itensDone !== undefined) {
+        itensDone.forEach((e) => {
+          const inputCheck = document.getElementsByClassName(e)[0];
+          if (inputCheck !== undefined) {
+            inputCheck.style.textDecoration = 'line-through';
+            inputCheck.firstChild.checked = true;
+          }
+        });
+      }
+    }
+  }
+
   function fetchComida(data) {
+    setInitialLocalStorage();
     fetchAPI(data)
       .then((response) => setComida(response.meals[0]));
     setLoading(true);
   }
 
-  function riskLabel(e, idLabel) {
+  function riskLabel(e, item) {
     const { target: { checked } } = e;
+    const getLocalStorageData = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const itensDone = getLocalStorageData.meals[idPage];
     if (checked) {
+      let newItensDone = [];
       document
-        .getElementsByClassName(idLabel)[0].style.textDecoration = 'line-through';
+        .getElementsByClassName(item)[0]
+        .style.textDecoration = 'line-through';
+      if (itensDone === undefined) {
+        newItensDone = [item];
+      } else {
+        newItensDone = [...itensDone, item];
+      }
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        ...getLocalStorageData,
+        meals: {
+          [idPage]: newItensDone,
+        },
+      }));
     } else {
       document
-        .getElementsByClassName(idLabel)[0].style.textDecoration = 'none';
+        .getElementsByClassName(item)[0]
+        .style.textDecoration = 'none';
+      const newItensDone = itensDone.filter((element) => element !== item);
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        ...getLocalStorageData,
+        meals: {
+          [idPage]: newItensDone,
+        },
+      }));
     }
   }
-
-  useEffect(() => {
-    fetchComida(URL_MEALS);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   function getIngredientes() {
     const ingredientes = [];
@@ -50,6 +85,19 @@ function PreparandoComida() {
     }
     return ingredientes;
   }
+
+  useEffect(() => {
+    fetchComida(URL_MEALS);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const ALMOST_ONE_SEC = 545;
+    setTimeout(() => {
+      loadRecipeStatus();
+    }, ALMOST_ONE_SEC);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading]);
 
   return (
     <section>
