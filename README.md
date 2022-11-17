@@ -1,4 +1,4 @@
-# Projeto App de Receitas :falafel:
+# Projeto App de Receitas :taco:
 
 ## Contexto :selfie:
 
