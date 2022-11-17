@@ -61,6 +61,14 @@ Neste projeto, desenvolvemos as seguintes habilidades:
   ```
     npm start
   ```
+  
+## Deploy do projeto :sparkle:
+
+- [https://recipes-app-production-3add.up.railway.app/](https://recipes-app-production-3add.up.railway.app/)
+
+* Página de login, para habilitar o botão de logar:
+  - *Digitar um email em no formato válido ex: email@provedor.com*
+  - *Senha: Deve possuir 7 ou mais caracteres.*
 
 
 ## Melhorias futuras :bookmark_tabs:
